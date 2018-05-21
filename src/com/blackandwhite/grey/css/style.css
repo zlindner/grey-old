@@ -1,0 +1,79 @@
+.content {
+    -fx-background-color: #f1f4f7;
+}
+
+.welcome {
+    -fx-text-fill: #5b6068;
+    -fx-font-size: 18px;
+}
+
+.title {
+    -fx-text-fill: #9ba7b7;
+    -fx-font-size: 10px;
+}
+
+.sidebar {
+    -fx-background-color: #ffffff;
+}
+
+.sidebar-button {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4d5665;
+    -fx-font-size: 16px;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-radius: 0;
+    -fx-border-color: #eff1f4;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 24px 24px;
+    -fx-background-position: 10% 50%;
+}
+
+.active {
+    -fx-text-fill: #2069f6;
+    -fx-background-color: linear-gradient(to right, #f2f6ff, #ffffff 35%);
+}
+
+.dashboard {
+    -fx-border-width: 1 0 1 0;
+    -fx-background-image: url("/assets/dashboard.png");
+}
+
+.projects {
+    -fx-background-image: url("/assets/projects.png");
+}
+
+.projects:hover {
+    -fx-background-image: url("/assets/projects_hover.png");
+}
+
+.customers {
+    -fx-background-image: url("/assets/customers.png");
+}
+
+.customers:hover {
+    -fx-background-image: url("/assets/customers_hover.png");
+}
+
+.suppliers {
+    -fx-background-image: url("/assets/suppliers.png");
+}
+
+.products {
+    -fx-background-image: url("/assets/products.png");
+}
+
+.purchases {
+    -fx-background-image: url("/assets/purchases.png");
+}
+
+.close {
+    -fx-background-color: transparent;
+    -fx-font-size: 20px;
+    -fx-text-fill: #4d5665;
+}
+
+.minimize {
+    -fx-background-color: transparent;
+    -fx-font-size: 20px;
+    -fx-text-fill: #4d5665;
+}

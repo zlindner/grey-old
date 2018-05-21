@@ -1,0 +1,89 @@
+package com.blackandwhite.grey.controller;
+
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
+public class ControllerGrey {
+
+    private Stage stage;
+
+    private double dx;
+    private double dy;
+
+    @FXML
+    private BorderPane content;
+
+    @FXML
+    private Button dashboard;
+    private Button active;
+
+    public void init(Stage stage) {
+        this.stage = stage;
+
+        active = dashboard;
+        active.getStyleClass().add("active");
+    }
+
+    @FXML
+    private void menubarPressed(MouseEvent e) {
+        dx = stage.getX() - e.getScreenX();
+        dy = stage.getY() - e.getScreenY();
+    }
+
+    @FXML
+    private void menubarDragged(MouseEvent e) {
+        stage.setX(e.getScreenX() + dx);
+        stage.setY(e.getScreenY() + dy);
+    }
+
+    @FXML
+    private void close(ActionEvent e) {
+        Platform.exit();
+    }
+
+    @FXML
+    private void minimize(ActionEvent e) {
+        stage.setIconified(true);
+    }
+
+    @FXML
+    private void sidebarClicked(ActionEvent e) {
+        Button b = (Button) e.getSource();
+        String id = b.getId();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/" + id + ".fxml"));
+
+        active.getStyleClass().remove("active");
+        active = b;
+        active.getStyleClass().add("active");
+
+        try {
+            Class controller = Class.forName("com.blackandwhite.grey.controller.Controller" + Character.toUpperCase(id.charAt(0)) + id.substring(1));
+            loader.setController(controller.getConstructor().newInstance());
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+        } catch (InstantiationException ex) {
+            ex.printStackTrace();
+        } catch (NoSuchMethodException ex) {
+            ex.printStackTrace();
+        } catch (InvocationTargetException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            content.setCenter(loader.load());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+}
