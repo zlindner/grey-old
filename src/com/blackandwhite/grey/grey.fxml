@@ -90,7 +90,7 @@
             <fx:include source="dashboard/dashboard.fxml" />
          </center>
       </BorderPane>
-      <HBox alignment="CENTER_RIGHT" onMouseDragged="#menubarDragged" onMousePressed="#menubarPressed" prefHeight="100.0" prefWidth="1170.0">
+      <HBox alignment="CENTER_RIGHT" onMouseDragged="#menubarDragged" onMousePressed="#menubarPressed" prefHeight="50.0" prefWidth="1170.0">
          <children>
             <Button mnemonicParsing="false" onAction="#minimize" styleClass="minimize" text="-">
                <HBox.margin>

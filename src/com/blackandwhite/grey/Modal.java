@@ -1,11 +1,8 @@
 package com.blackandwhite.grey;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -21,7 +18,7 @@ public class Modal {
         stage.show();
     }
 
-    private void close(ActionEvent e) {
+    public void close() {
         stage.close();
     }
 
@@ -72,16 +69,15 @@ public class Modal {
 
             modal.stage = stage;
 
-            HBox hbox = new HBox();
-            hbox.setAlignment(Pos.CENTER_RIGHT);
-            hbox.setPrefSize(this.width, 50);
-
             Button close = new Button("x");
-            close.setOnAction(modal::close);
+            close.setLayoutX(this.width - 50);
+            close.setLayoutY(10);
+            close.setOnAction(event -> modal.close());
             close.getStyleClass().add("close");
 
-            hbox.getChildren().add(close);
-            root.getChildren().add(hbox);
+            root.getChildren().add(close);
+
+            root.requestFocus();
 
             return modal;
         }

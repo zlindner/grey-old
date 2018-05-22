@@ -25,7 +25,7 @@ public class ControllerGrey extends Controller {
 
     @FXML
     private Button dashboard;
-    private Button active;
+    private Button active; // currently selected button
 
     @Override
     public void init() {
@@ -50,12 +50,12 @@ public class ControllerGrey extends Controller {
     }
 
     @FXML
-    public void close(ActionEvent e) {
+    public void close() {
         Platform.exit();
     }
 
     @FXML
-    public void minimize(ActionEvent e) {
+    public void minimize() {
         stage.setIconified(true);
     }
 
@@ -76,22 +76,8 @@ public class ControllerGrey extends Controller {
             Method init = o.getClass().getMethod("init");
             init.invoke(o);
 
-            //loader.setController(controller.getConstructor().newInstance());
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (IllegalAccessException ex) {
-            ex.printStackTrace();
-        } catch (InstantiationException ex) {
-            ex.printStackTrace();
-        } catch (NoSuchMethodException ex) {
-            ex.printStackTrace();
-        } catch (InvocationTargetException ex) {
-            ex.printStackTrace();
-        }
-
-        try {
             content.setCenter(loader.load());
-        } catch (IOException ex) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException | IOException ex) {
             ex.printStackTrace();
         }
     }

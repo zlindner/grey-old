@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" stylesheets="@add.css" styleClass="modal" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackandwhite.grey.customers.ControllerCustomers">
-    <children>
-    </children>
+<AnchorPane prefHeight="400.0" prefWidth="700.0" styleClass="modal" stylesheets="@add.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackandwhite.grey.customers.ControllerCustomers">
+   <children>
+      <TextField fx:id="firstField" layoutX="75.0" layoutY="100.0" prefHeight="30.0" prefWidth="250.0" promptText="First name" />
+      <TextField fx:id="lastField" layoutX="350.0" layoutY="100.0" prefHeight="30.0" prefWidth="250.0" promptText="Last name" />
+      <TextField fx:id="cityField" layoutX="75.0" layoutY="150.0" prefHeight="30.0" prefWidth="200.0" promptText="City" />
+      <TextField fx:id="provinceField" layoutX="300.0" layoutY="150.0" prefHeight="30.0" prefWidth="150.0" promptText="Province" />
+      <TextField fx:id="postalField" layoutX="475.0" layoutY="150.0" promptText="Postal code" />
+      <TextField fx:id="addressField" layoutX="75.0" layoutY="200.0" prefHeight="30.0" prefWidth="175.0" promptText="Address" />
+      <TextField fx:id="emailField" layoutX="275.0" layoutY="200.0" prefHeight="30.0" prefWidth="250.0" promptText="Email" />
+      <TextField fx:id="workField" layoutX="75.0" layoutY="250.0" prefHeight="30.0" prefWidth="175.0" promptText="Work phone" />
+      <TextField fx:id="cellField" layoutX="275.0" layoutY="250.0" prefHeight="30.0" prefWidth="175.0" promptText="Cell phone" />
+      <TextField fx:id="homeField" layoutX="475.0" layoutY="250.0" prefHeight="30.0" prefWidth="175.0" promptText="Home phone" />
+      <Label layoutX="75.0" layoutY="25.0" styleClass="title" text="Add a New Customer" />
+      <Button layoutX="390.0" layoutY="325.0" mnemonicParsing="false" onAction="#confirmAdd" prefHeight="40.0" prefWidth="200.0" styleClass="confirm" text="Confirm" />
+   </children>
 </AnchorPane>
