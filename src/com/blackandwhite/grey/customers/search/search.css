@@ -1,0 +1,9 @@
+.modal {
+    -fx-background-color: #f1f4f7;
+}
+
+.close {
+    -fx-background-color: transparent;
+    -fx-font-size: 20px;
+    -fx-text-fill: #4d5665;
+}

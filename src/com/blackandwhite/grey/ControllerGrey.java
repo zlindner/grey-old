@@ -1,4 +1,4 @@
-package com.blackandwhite.grey.controller;
+package com.blackandwhite.grey;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class ControllerGrey {
+public class ControllerGrey extends Controller {
 
     private Stage stage;
 
@@ -27,11 +27,14 @@ public class ControllerGrey {
     private Button dashboard;
     private Button active;
 
-    public void init(Stage stage) {
-        this.stage = stage;
-
+    @Override
+    public void init() {
         active = dashboard;
         active.getStyleClass().add("active");
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     @FXML
@@ -60,14 +63,14 @@ public class ControllerGrey {
     private void sidebarClicked(ActionEvent e) {
         Button b = (Button) e.getSource();
         String id = b.getId();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/" + id + ".fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(id + "/" + id + ".fxml"));
 
         active.getStyleClass().remove("active");
         active = b;
         active.getStyleClass().add("active");
 
         try {
-            Class controller = Class.forName("com.blackandwhite.grey.controller.Controller" + Character.toUpperCase(id.charAt(0)) + id.substring(1));
+            Class controller = Class.forName("com.blackandwhite.grey." + id + ".Controller" + Character.toUpperCase(id.charAt(0)) + id.substring(1));
             Object o = controller.getConstructor().newInstance();
 
             Method init = o.getClass().getMethod("init");

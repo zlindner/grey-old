@@ -1,6 +1,5 @@
 package com.blackandwhite.grey;
 
-import com.blackandwhite.grey.controller.ControllerGrey;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,12 +11,13 @@ public class Grey extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/grey.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("grey.fxml"));
 
         Parent root = loader.load();
 
         ControllerGrey controller = loader.getController();
-        controller.init(stage);
+        controller.init();
+        controller.setStage(stage);
 
         Scene scene = new Scene(root, 1170, 720);
 

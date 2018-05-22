@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="670.0" prefWidth="970.0" stylesheets="@purchases.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackandwhite.grey.purchases.ControllerPurchases">
+    <children>
+        <Label layoutX="25.0" layoutY="20.0" styleClass="title" text="Purchases" />
+    </children>
+</AnchorPane>

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1170.0" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackandwhite.grey.controller.ControllerGrey">
+<AnchorPane prefHeight="720.0" prefWidth="1170.0" styleClass="root" stylesheets="@grey.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackandwhite.grey.ControllerGrey">
    <children>
       <VBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="250.0" styleClass="sidebar">
          <children>
@@ -87,7 +87,7 @@
       </VBox>
       <BorderPane fx:id="content" layoutX="250.0" prefHeight="720.0" prefWidth="920.0" styleClass="content">
          <center>
-            <fx:include source="dashboard.fxml" />
+            <fx:include source="dashboard/dashboard.fxml" />
          </center>
       </BorderPane>
       <HBox alignment="CENTER_RIGHT" onMouseDragged="#menubarDragged" onMousePressed="#menubarPressed" prefHeight="100.0" prefWidth="1170.0">
