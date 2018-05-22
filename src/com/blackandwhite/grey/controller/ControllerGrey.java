@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class ControllerGrey {
 
@@ -46,12 +47,12 @@ public class ControllerGrey {
     }
 
     @FXML
-    private void close(ActionEvent e) {
+    public void close(ActionEvent e) {
         Platform.exit();
     }
 
     @FXML
-    private void minimize(ActionEvent e) {
+    public void minimize(ActionEvent e) {
         stage.setIconified(true);
     }
 
@@ -67,7 +68,12 @@ public class ControllerGrey {
 
         try {
             Class controller = Class.forName("com.blackandwhite.grey.controller.Controller" + Character.toUpperCase(id.charAt(0)) + id.substring(1));
-            loader.setController(controller.getConstructor().newInstance());
+            Object o = controller.getConstructor().newInstance();
+
+            Method init = o.getClass().getMethod("init");
+            init.invoke(o);
+
+            //loader.setController(controller.getConstructor().newInstance());
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } catch (IllegalAccessException ex) {

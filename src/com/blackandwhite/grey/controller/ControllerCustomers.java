@@ -1,55 +1,28 @@
 package com.blackandwhite.grey.controller;
 
-import javafx.event.ActionEvent;
+import com.blackandwhite.grey.Controller;
+import com.blackandwhite.grey.Modal;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.io.IOException;
+public class ControllerCustomers extends Controller {
 
-//TODO dragging of modals
-public class ControllerCustomers {
+    private static Modal newCustomer;
+    private static Modal searchCustomer;
 
-    private static Stage newCustomer;
-    private static Stage searchCustomer;
-
-    @FXML
-    private void newCustomer(MouseEvent e) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/new_customer.fxml"));
-
-        try {
-            Parent root = loader.load();
-
-            Scene scene = new Scene(root, 500, 600);
-
-            newCustomer = new Stage();
-            newCustomer.setScene(scene);
-            newCustomer.initModality(Modality.APPLICATION_MODAL);
-            newCustomer.setResizable(false);
-            newCustomer.initStyle(StageStyle.UNDECORATED);
-            newCustomer.show();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    @Override
+    public void init() {
+        newCustomer = new Modal.Builder().fxml("new_customer").width(700).height(600).build();
+        //searchCustomer = new Modal.Builder().fxml("search_customer").width(700).height(600).build();
     }
 
     @FXML
-    private void cancelNew(ActionEvent e) {
-        newCustomer.close();
+    private void customerAdd(MouseEvent e) {
+        newCustomer.show();
     }
 
     @FXML
-    private void confirmNew(ActionEvent e) {
-        //TODO stuff
-    }
-
-    @FXML
-    private void searchCustomers(MouseEvent e) {
-
+    private void customerSearch(MouseEvent e) {
+        searchCustomer.show();
     }
 }

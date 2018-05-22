@@ -1,8 +1,14 @@
 package com.blackandwhite.grey.controller;
 
+import javafx.fxml.FXML;
+
+import java.awt.*;
+
 public class ControllerDashboard {
 
-    public ControllerDashboard() {
+    @FXML
+    private Label customers;
 
-    }
+    @FXML
+    private Label newCustomers;
 }
