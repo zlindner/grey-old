@@ -1,14 +1,13 @@
 package com.blackandwhite.grey.dashboard;
 
-import com.blackandwhite.grey.Database;
+import com.blackandwhite.grey.DataSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import org.apache.commons.dbcp2.BasicDataSource;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
-public class ControllerDashboard  {
+public class ControllerDashboard {
 
     @FXML
     private Label lblCustomers;
@@ -17,23 +16,26 @@ public class ControllerDashboard  {
     private Label lblNewCustomers;
 
     public void initialize() {
-        lblCustomers.setText(String.valueOf(getCustomers()));
+        try {
+            lblCustomers.setText(String.valueOf(getCustomers()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         lblNewCustomers.setText(getNewCustomers() + " New ↑");
     }
 
-    private int getCustomers() {
+    private int getCustomers() throws SQLException {
         int customers = 0;
         String query = "SELECT * FROM CUSTOMER";
+        BasicDataSource basicDS = DataSource.getInstance().getBasicDS();
 
-        try {
-            Statement st = Database.getConnection().createStatement();
+        try (Connection con = basicDS.getConnection(); PreparedStatement st = con.prepareStatement(query)) {
             ResultSet rs = st.executeQuery(query);
 
-            while(rs.next()) {
+            while (rs.next()) {
                 customers++;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
 
         return customers;

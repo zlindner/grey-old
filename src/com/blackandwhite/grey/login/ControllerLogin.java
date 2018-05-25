@@ -1,7 +1,7 @@
 package com.blackandwhite.grey.login;
 
 import com.blackandwhite.grey.ControllerGrey;
-import com.blackandwhite.grey.Database;
+import com.blackandwhite.grey.DataSource;
 import javafx.application.Platform;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
@@ -12,9 +12,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class ControllerLogin {
 
@@ -55,25 +57,46 @@ public class ControllerLogin {
     private void login() {
         String user = tfUsername.getText();
         String pass = pfPassword.getText();
+        boolean doConnect = true;
 
         if (user.isEmpty()) {
             tfUsername.pseudoClassStateChanged(error, true);
+            doConnect = false;
         } else {
             tfUsername.pseudoClassStateChanged(error, false);
         }
 
         if (pass.isEmpty()) {
             pfPassword.pseudoClassStateChanged(error, true);
+            doConnect = false;
         } else {
             pfPassword.pseudoClassStateChanged(error, false);
         }
 
-        Database.establishConnection(user, pass);
-        Connection con = Database.getConnection();
+        if (!doConnect) {
+            //TODO error message
+            return;
+        }
 
-        if (con == null) {
+        Connection con = null;
+
+        try {
+            DataSource.setUsername(user);
+            DataSource.setPassword(pass);
+
+            BasicDataSource basicDS = DataSource.getInstance().getBasicDS();
+            con = basicDS.getConnection();
+        } catch (SQLException e) {
             System.out.println("Error establishing connection to database");
             return;
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         //TODO init database -> create tables if not exists, etc...

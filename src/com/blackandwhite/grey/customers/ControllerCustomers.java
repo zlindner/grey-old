@@ -1,6 +1,6 @@
 package com.blackandwhite.grey.customers;
 
-import com.blackandwhite.grey.Database;
+import com.blackandwhite.grey.DataSource;
 import com.blackandwhite.grey.Modal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,10 +10,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.apache.commons.dbcp2.BasicDataSource;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.regex.Pattern;
 
 public class ControllerCustomers {
@@ -88,7 +87,13 @@ public class ControllerCustomers {
     private TableColumn<Customer, String> colAddress;
 
     public void initialize() {
-        ObservableList<Customer> customers = getCustomerList();
+        ObservableList<Customer> customers = null;
+
+        try {
+            customers = getCustomerList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         colFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         colLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
@@ -104,13 +109,12 @@ public class ControllerCustomers {
         table.setItems(customers);
     }
 
-    private ObservableList<Customer> getCustomerList() {
+    private ObservableList<Customer> getCustomerList() throws SQLException {
         ObservableList<Customer> list = FXCollections.observableArrayList();
-
         String query = "SELECT * FROM CUSTOMER";
+        BasicDataSource basicDS = DataSource.getInstance().getBasicDS();
 
-        try {
-            Statement st = Database.getConnection().createStatement();
+        try (Connection con = basicDS.getConnection(); PreparedStatement st = con.prepareStatement(query)) {
             ResultSet rs = st.executeQuery(query);
 
             while (rs.next()) {
@@ -140,8 +144,6 @@ public class ControllerCustomers {
 
                 list.add(c);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
 
         return list;
