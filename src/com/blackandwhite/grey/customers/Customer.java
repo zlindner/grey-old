@@ -4,38 +4,78 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Customer {
 
-    private SimpleStringProperty first;
-    private SimpleStringProperty last;
+    private SimpleStringProperty firstName;
+    private SimpleStringProperty lastName;
     private SimpleStringProperty city;
-    private SimpleStringProperty prov;
-    private SimpleStringProperty postal;
-    private SimpleStringProperty addr;
+    private SimpleStringProperty province;
+    private SimpleStringProperty postalCode;
+    private SimpleStringProperty address;
     private SimpleStringProperty email;
-    private SimpleStringProperty work;
-    private SimpleStringProperty cell;
-    private SimpleStringProperty home;
+    private SimpleStringProperty workPhone;
+    private SimpleStringProperty cellPhone;
+    private SimpleStringProperty homePhone;
+
+    public String getFirstName() {
+        return firstName.get();
+    }
+
+    public String getLastName() {
+        return lastName.get();
+    }
+
+    public String getCity() {
+        return city.get();
+    }
+
+    public String getProvince() {
+        return province.get();
+    }
+
+    public String getPostalCode() {
+        return postalCode.get();
+    }
+
+    public String getAddress() {
+        return address.get();
+    }
+
+    public String getEmail() {
+        return email.get();
+    }
+
+    public String getWorkPhone() {
+        return workPhone.get();
+    }
+
+    public String getCellPhone() {
+        return cellPhone.get();
+    }
+
+    public String getHomePhone() {
+        return homePhone.get();
+    }
 
     public static class Builder {
 
-        private SimpleStringProperty first;
-        private SimpleStringProperty last;
+        private SimpleStringProperty firstName;
+        private SimpleStringProperty lastName;
         private SimpleStringProperty city;
-        private SimpleStringProperty prov;
-        private SimpleStringProperty postal;
-        private SimpleStringProperty addr;
+        private SimpleStringProperty province;
+        private SimpleStringProperty postalCode;
+        private SimpleStringProperty address;
         private SimpleStringProperty email;
-        private SimpleStringProperty work;
-        private SimpleStringProperty cell;
-        private SimpleStringProperty home;
+        private SimpleStringProperty workPhone;
+        private SimpleStringProperty cellPhone;
+        private SimpleStringProperty homePhone;
 
-        public Builder first(String first) {
-            this.first = new SimpleStringProperty(first);
+        public Builder firstName(String firstName) {
+            this.firstName = new SimpleStringProperty(firstName);
 
             return this;
         }
 
-        public Builder last(String last) {
-            this.last = new SimpleStringProperty(last);
+        public Builder lastName(String lastName) {
+            this.lastName = new SimpleStringProperty(lastName);
 
             return this;
         }
@@ -46,20 +86,20 @@ public class Customer {
             return this;
         }
 
-        public Builder prov(String prov) {
-            this.prov = new SimpleStringProperty(prov);
+        public Builder province(String province) {
+            this.province = new SimpleStringProperty(province);
 
             return this;
         }
 
-        public Builder postal(String postal) {
-            this.postal = new SimpleStringProperty(postal);
+        public Builder postalCode(String postalCode) {
+            this.postalCode = new SimpleStringProperty(postalCode);
 
             return this;
         }
 
-        public Builder addr(String addr) {
-            this.addr = new SimpleStringProperty(addr);
+        public Builder address(String address) {
+            this.address = new SimpleStringProperty(address);
 
             return this;
         }
@@ -70,20 +110,20 @@ public class Customer {
             return this;
         }
 
-        public Builder work(String work) {
-            this.work = new SimpleStringProperty(work);
+        public Builder workPhone(String workPhone) {
+            this.workPhone = new SimpleStringProperty(workPhone);
 
             return this;
         }
 
-        public Builder cell(String cell) {
-            this.cell = new SimpleStringProperty(cell);
+        public Builder cellPhone(String cellPhone) {
+            this.cellPhone = new SimpleStringProperty(cellPhone);
 
             return this;
         }
 
-        public Builder home(String home) {
-            this.home = new SimpleStringProperty(home);
+        public Builder homePhone(String homePhone) {
+            this.homePhone = new SimpleStringProperty(homePhone);
 
             return this;
         }
@@ -91,16 +131,16 @@ public class Customer {
         public Customer build() {
             Customer customer = new Customer();
 
-            customer.first = this.first;
-            customer.last = this.last;
+            customer.firstName = this.firstName;
+            customer.lastName = this.lastName;
             customer.city = this.city;
-            customer.prov = this.prov;
-            customer.postal = this.postal;
-            customer.addr = this.addr;
+            customer.province = this.province;
+            customer.postalCode = this.postalCode;
+            customer.address = this.address;
             customer.email = this.email;
-            customer.work = this.work;
-            customer.cell = this.cell;
-            customer.home = this.home;
+            customer.workPhone = this.workPhone;
+            customer.cellPhone = this.cellPhone;
+            customer.homePhone = this.homePhone;
 
             return customer;
         }

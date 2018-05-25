@@ -23,10 +23,10 @@ public class ControllerLogin {
     private double dy;
 
     @FXML
-    private TextField userField;
+    private TextField tfUsername;
 
     @FXML
-    private PasswordField passField;
+    private PasswordField pfPassword;
 
     private PseudoClass error = PseudoClass.getPseudoClass("error");
 
@@ -53,19 +53,19 @@ public class ControllerLogin {
 
     @FXML
     private void login() {
-        String user = userField.getText();
-        String pass = passField.getText();
+        String user = tfUsername.getText();
+        String pass = pfPassword.getText();
 
         if (user.isEmpty()) {
-            userField.pseudoClassStateChanged(error, true);
+            tfUsername.pseudoClassStateChanged(error, true);
         } else {
-            userField.pseudoClassStateChanged(error, false);
+            tfUsername.pseudoClassStateChanged(error, false);
         }
 
         if (pass.isEmpty()) {
-            passField.pseudoClassStateChanged(error, true);
+            pfPassword.pseudoClassStateChanged(error, true);
         } else {
-            passField.pseudoClassStateChanged(error, false);
+            pfPassword.pseudoClassStateChanged(error, false);
         }
 
         Database.establishConnection(user, pass);

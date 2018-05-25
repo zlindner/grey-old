@@ -23,7 +23,7 @@
       </VBox>
       <VBox layoutY="100.0" prefHeight="620.0" prefWidth="250.0" styleClass="sidebar">
          <children>
-            <Button fx:id="dashboard" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#sidebarClicked" prefHeight="50.0" prefWidth="250.0" text="Dashboard">
+            <Button fx:id="btnDashboard" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#sidebarClicked" prefHeight="50.0" prefWidth="250.0" text="Dashboard">
                <styleClass>
                   <String fx:value="sidebar-button" />
                   <String fx:value="dashboard" />

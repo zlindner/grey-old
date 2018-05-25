@@ -26,12 +26,12 @@ public class ControllerGrey {
     private Label welcome; // welcome text
 
     @FXML
-    private Button dashboard;
-    private Button active; // currently selected button
+    private Button btnDashboard;
+    private Button btnActive; // currently selected button
 
     public void initialize() {
-        active = dashboard;
-        active.getStyleClass().add("active");
+        btnActive = btnDashboard;
+        btnActive.getStyleClass().add("btnActive");
     }
 
     public void setStage(Stage stage) {
@@ -66,13 +66,13 @@ public class ControllerGrey {
 
     @FXML
     private void sidebarClicked(ActionEvent e) {
-        Button b = (Button) e.getSource();
-        String id = b.getId();
+        Button btn = (Button) e.getSource();
+        String id = btn.getId();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(id + "/" + id + ".fxml"));
 
-        active.getStyleClass().remove("active");
-        active = b;
-        active.getStyleClass().add("active");
+        btnActive.getStyleClass().remove("btnActive");
+        btnActive = btn;
+        btnActive.getStyleClass().add("btnActive");
 
         try {
             content.setCenter(loader.load());

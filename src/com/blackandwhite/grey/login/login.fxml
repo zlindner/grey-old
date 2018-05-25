@@ -12,11 +12,11 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="400.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackandwhite.grey.login.ControllerLogin">
    <children>
-      <TextField fx:id="userField" alignment="CENTER" layoutX="50.0" layoutY="250.0" prefHeight="50.0" prefWidth="300.0" promptText="Username">
+      <TextField fx:id="tfUsername" alignment="CENTER" layoutX="50.0" layoutY="250.0" prefHeight="50.0" prefWidth="300.0" promptText="Username">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <PasswordField fx:id="passField" alignment="CENTER" layoutX="50.0" layoutY="325.0" prefHeight="50.0" prefWidth="300.0" promptText="Password">
+      <PasswordField fx:id="pfPassword" alignment="CENTER" layoutX="50.0" layoutY="325.0" prefHeight="50.0" prefWidth="300.0" promptText="Password">
          <font>
             <Font size="14.0" />
          </font></PasswordField>

@@ -1,5 +1,6 @@
 package com.blackandwhite.grey.customers;
 
+import com.blackandwhite.grey.Database;
 import com.blackandwhite.grey.Modal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,6 +11,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.regex.Pattern;
 
 public class ControllerCustomers {
@@ -18,35 +22,35 @@ public class ControllerCustomers {
     private static Modal search;
 
     @FXML
-    private TextField firstField;
+    private TextField tfFirstName;
 
     @FXML
-    private TextField lastField;
+    private TextField tfLastName;
 
     @FXML
-    private TextField cityField;
+    private TextField tfCity;
 
     //TODO dropdown menu?
     @FXML
     private TextField provField;
 
     @FXML
-    private TextField postalField;
+    private TextField tfPostalCode;
 
     @FXML
-    private TextField addrField;
+    private TextField tfAddress;
 
     @FXML
-    private TextField emailField;
+    private TextField tfEmail;
 
     @FXML
-    private TextField workField;
+    private TextField tfWorkPhone;
 
     @FXML
-    private TextField cellField;
+    private TextField tfCellPhone;
 
     @FXML
-    private TextField homeField;
+    private TextField tfHomePhone;
 
     private PseudoClass error = PseudoClass.getPseudoClass("error");
 
@@ -54,55 +58,91 @@ public class ControllerCustomers {
     private TableView<Customer> table;
 
     @FXML
-    private TableColumn<Customer, String> firstCol;
+    private TableColumn<Customer, String> colFirstName;
 
     @FXML
-    private TableColumn<Customer, String> lastCol;
+    private TableColumn<Customer, String> colLastName;
 
     @FXML
-    private TableColumn<Customer, String> cityCol;
+    private TableColumn<Customer, String> colCity;
 
     @FXML
-    private TableColumn<Customer, String> provCol;
+    private TableColumn<Customer, String> colProvince;
 
     @FXML
-    private TableColumn<Customer, String> postalCol;
+    private TableColumn<Customer, String> colPostalCode;
 
     @FXML
-    private TableColumn<Customer, String> emailCol;
+    private TableColumn<Customer, String> colEmail;
 
     @FXML
-    private TableColumn<Customer, String> workCol;
+    private TableColumn<Customer, String> colWorkPhone;
 
     @FXML
-    private TableColumn<Customer, String> cellCol;
+    private TableColumn<Customer, String> colCellPhone;
 
     @FXML
-    private TableColumn<Customer, String> homeCol;
+    private TableColumn<Customer, String> colHomePhone;
 
     @FXML
-    private TableColumn<Customer, String> addrCol;
+    private TableColumn<Customer, String> colAddress;
 
     public void initialize() {
-        firstCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-        lastCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-        cityCol.setCellValueFactory(new PropertyValueFactory<>("city"));
-        provCol.setCellValueFactory(new PropertyValueFactory<>("prov"));
-        postalCol.setCellValueFactory(new PropertyValueFactory<>("postal"));
-        workCol.setCellValueFactory(new PropertyValueFactory<>("work"));
-        cellCol.setCellValueFactory(new PropertyValueFactory<>("cell"));
-        homeCol.setCellValueFactory(new PropertyValueFactory<>("home"));
-        addrCol.setCellValueFactory(new PropertyValueFactory<>("addr"));
+        ObservableList<Customer> customers = getCustomerList();
 
-        ObservableList<Customer> list = getCustomerList();
-        table.setItems(list);
+        colFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        colLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        colCity.setCellValueFactory(new PropertyValueFactory<>("city"));
+        colProvince.setCellValueFactory(new PropertyValueFactory<>("province"));
+        colPostalCode.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colWorkPhone.setCellValueFactory(new PropertyValueFactory<>("workPhone"));
+        colCellPhone.setCellValueFactory(new PropertyValueFactory<>("cellPhone"));
+        colHomePhone.setCellValueFactory(new PropertyValueFactory<>("homePhone"));
+
+        table.setItems(customers);
     }
 
     private ObservableList<Customer> getCustomerList() {
-        Customer c1 = new Customer.Builder().first("Jim").last("Halpert").city("Scranton").prov("Pennsylvania").postal("90210").addr("51 Dunder Mifflin Dr").email("Jimhalps@dunder.com").work("5001231234").cell("5195051234").home("").build();
+        ObservableList<Customer> list = FXCollections.observableArrayList();
 
-        ObservableList<Customer> list = FXCollections.observableArrayList(c1);
+        String query = "SELECT * FROM CUSTOMER";
+
+        try {
+            Statement st = Database.getConnection().createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String city = rs.getString("city");
+                String province = rs.getString("province");
+                String postalCode = rs.getString("postal_code");
+                String address = rs.getString("address");
+                String email = rs.getString("email");
+                String workPhone = rs.getString("work_phone");
+                String cellPhone = rs.getString("cell_phone");
+                String homePhone = rs.getString("home_phone");
+
+                Customer c = new Customer.Builder()
+                        .firstName(firstName)
+                        .lastName(lastName)
+                        .city(city)
+                        .province(province)
+                        .postalCode(postalCode)
+                        .address(address)
+                        .email(email)
+                        .workPhone(workPhone)
+                        .cellPhone(cellPhone)
+                        .homePhone(homePhone)
+                        .build();
+
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return list;
     }
@@ -119,28 +159,28 @@ public class ControllerCustomers {
 
     @FXML
     private void confirmAdd() {
-        String first = firstField.getText();
-        String last = lastField.getText();
-        String city = cityField.getText();
+        String first = tfFirstName.getText();
+        String last = tfLastName.getText();
+        String city = tfCity.getText();
         String prov = provField.getText();
-        String postal = postalField.getText();
-        String addr = addrField.getText();
-        String email = emailField.getText();
-        String work = workField.getText();
-        String cell = cellField.getText();
-        String home = homeField.getText();
+        String postal = tfPostalCode.getText();
+        String addr = tfAddress.getText();
+        String email = tfEmail.getText();
+        String work = tfWorkPhone.getText();
+        String cell = tfCellPhone.getText();
+        String home = tfHomePhone.getText();
 
         //TODO extra name validation required???
         if (first.isEmpty()) {
-            firstField.pseudoClassStateChanged(error, true);
+            tfFirstName.pseudoClassStateChanged(error, true);
         } else {
-            firstField.pseudoClassStateChanged(error, false);
+            tfFirstName.pseudoClassStateChanged(error, false);
         }
 
         if (last.isEmpty()) {
-            lastField.pseudoClassStateChanged(error, true);
+            tfLastName.pseudoClassStateChanged(error, true);
         } else {
-            lastField.pseudoClassStateChanged(error, false);
+            tfLastName.pseudoClassStateChanged(error, false);
         }
 
         //TODO city validation
@@ -151,11 +191,11 @@ public class ControllerCustomers {
         if (!postal.isEmpty()) {
             if (validatePostal(postal)) {
                 postal = postal.replaceAll("\\s", "");
-                postalField.pseudoClassStateChanged(error, false);
+                tfPostalCode.pseudoClassStateChanged(error, false);
 
                 System.out.println(postal);
             } else {
-                postalField.pseudoClassStateChanged(error, true);
+                tfPostalCode.pseudoClassStateChanged(error, true);
             }
         }
 
@@ -163,44 +203,44 @@ public class ControllerCustomers {
 
         if (!email.isEmpty()) {
             if (validateEmail(email)) {
-                emailField.pseudoClassStateChanged(error, false);
+                tfEmail.pseudoClassStateChanged(error, false);
 
                 System.out.println(email);
             } else {
-                emailField.pseudoClassStateChanged(error, true);
+                tfEmail.pseudoClassStateChanged(error, true);
             }
         }
 
         if (!work.isEmpty()) {
             if (validateNumber(work)) {
                 work = work.replaceAll("[^\\d.]", "");
-                workField.pseudoClassStateChanged(error, false);
+                tfWorkPhone.pseudoClassStateChanged(error, false);
 
                 System.out.println(work);
             } else {
-                workField.pseudoClassStateChanged(error, true);
+                tfWorkPhone.pseudoClassStateChanged(error, true);
             }
         }
 
         if (!cell.isEmpty()) {
             if (validateNumber(cell)) {
                 cell = cell.replaceAll("[^\\d.]", "");
-                cellField.pseudoClassStateChanged(error, false);
+                tfCellPhone.pseudoClassStateChanged(error, false);
 
                 System.out.println(cell);
             } else {
-                cellField.pseudoClassStateChanged(error, true);
+                tfCellPhone.pseudoClassStateChanged(error, true);
             }
         }
 
         if (!home.isEmpty()) {
             if (validateNumber(home)) {
                 home = home.replaceAll("[^\\d.]", "");
-                homeField.pseudoClassStateChanged(error, false);
+                tfHomePhone.pseudoClassStateChanged(error, false);
 
                 System.out.println(home);
             } else {
-                homeField.pseudoClassStateChanged(error, true);
+                tfHomePhone.pseudoClassStateChanged(error, true);
             }
         }
 

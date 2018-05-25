@@ -27,8 +27,8 @@
             <Image url="@../../../../assets/num_customers.png" />
          </image>
       </ImageView>
-      <Label fx:id="customers" layoutX="45.0" layoutY="400.0" text="9999" />
-      <Label fx:id="newCustomers" layoutX="45.0" layoutY="450.0" text="12 New ↑">
+      <Label fx:id="lblCustomers" layoutX="45.0" layoutY="400.0"/>
+      <Label fx:id="lblNewCustomers" layoutX="45.0" layoutY="450.0">
          <font>
             <Font size="12.0" />
          </font>
