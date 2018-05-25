@@ -1,14 +1,12 @@
 package com.blackandwhite.grey;
 
+import com.blackandwhite.grey.login.ControllerLogin;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import java.sql.Connection;
-import java.sql.Statement;
 
 public class Grey extends Application {
 
@@ -30,15 +28,15 @@ public class Grey extends Application {
         Statement statement = connection.createStatement();
         statement.execute(query);*/
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("grey.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("login/login.fxml"));
 
         Parent root = loader.load();
 
-        ControllerGrey controller = loader.getController();
-        controller.init();
-        controller.setStage(stage);
+        ControllerLogin login = loader.getController();
+        login.init();
+        login.setStage(stage);
 
-        Scene scene = new Scene(root, 1170, 720);
+        Scene scene = new Scene(root, 600, 400);
 
         stage.setScene(scene);
         stage.setResizable(false);
@@ -47,16 +45,6 @@ public class Grey extends Application {
     }
 
     public static void main(String[] args) {
-        Database.establishConnection();
-        Connection con = Database.getConnection();
-
-        if (con == null) {
-            System.out.println("Error establishing connection to database");
-            return;
-        }
-
-
-
         Application.launch(args);
     }
 }

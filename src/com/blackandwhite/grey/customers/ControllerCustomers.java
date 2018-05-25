@@ -74,7 +74,23 @@ public class ControllerCustomers extends Controller {
         String cell = cellField.getText();
         String home = homeField.getText();
 
+        //TODO extra name validation required???
+        if (first.isEmpty()) {
+            firstField.pseudoClassStateChanged(error, true);
+        } else {
+            firstField.pseudoClassStateChanged(error, false);
+        }
 
+        if (last.isEmpty()) {
+            lastField.pseudoClassStateChanged(error, true);
+        } else {
+            lastField.pseudoClassStateChanged(error, false);
+        }
+
+        //TODO city validation
+        if (!city.isEmpty()) {
+
+        }
 
         if (!postal.isEmpty()) {
             if (validatePostal(postal)) {
@@ -86,6 +102,8 @@ public class ControllerCustomers extends Controller {
                 postalField.pseudoClassStateChanged(error, true);
             }
         }
+
+        //TODO address validation
 
         if (!email.isEmpty()) {
             if (validateEmail(email)) {
@@ -206,37 +224,6 @@ public class ControllerCustomers extends Controller {
         } else {
             return false;
         }
-    }
-
-    private boolean validateAdd(String first, String last, String city, String province, String postal, String address, String email, String work, String cell, String home) {
-        boolean valid = true;
-
-        if (first.isEmpty()) {
-            firstField.pseudoClassStateChanged(error, true);
-            valid = false;
-        } else {
-            firstField.pseudoClassStateChanged(error, false);
-        }
-
-        if (last.isEmpty()) {
-            lastField.pseudoClassStateChanged(error, true);
-            valid = false;
-        } else {
-            lastField.pseudoClassStateChanged(error, false);
-        }
-
-        if (work.isEmpty() && cell.isEmpty() && home.isEmpty()) {
-            workField.pseudoClassStateChanged(error, true);
-            cellField.pseudoClassStateChanged(error, true);
-            homeField.pseudoClassStateChanged(error, true);
-            valid = false;
-        } else {
-            workField.pseudoClassStateChanged(error, false);
-            cellField.pseudoClassStateChanged(error, false);
-            homeField.pseudoClassStateChanged(error, false);
-        }
-
-        return valid;
     }
 
     /*

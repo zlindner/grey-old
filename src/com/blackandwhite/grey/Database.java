@@ -13,7 +13,7 @@ public class Database {
     private static String user;
     private static String pass;
 
-    public static void establishConnection() {
+    public static void establishConnection(String user, String pass) {
         con = null;
 
         try {
