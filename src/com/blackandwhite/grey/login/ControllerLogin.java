@@ -81,6 +81,7 @@ public class ControllerLogin {
         Connection con = null;
 
         try {
+            //TODO fails to connect if prior information was incorrect
             DataSource.setUsername(user);
             DataSource.setPassword(pass);
 
@@ -122,5 +123,6 @@ public class ControllerLogin {
 
         stage.setScene(scene);
         stage.show();
+        stage.centerOnScreen();
     }
 }

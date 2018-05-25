@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.layout.*?>
-
-<AnchorPane prefHeight="600.0" prefWidth="700.0" stylesheets="@search.css" styleClass="modal" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackandwhite.grey.customers.ControllerCustomers">
-    <children>
-    </children>
-</AnchorPane>

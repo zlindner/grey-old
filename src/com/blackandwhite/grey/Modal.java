@@ -13,23 +13,33 @@ import java.io.IOException;
 public class Modal {
 
     private Stage stage;
+    private IController parent;
 
     public void show() {
-        stage.show();
+        stage.showAndWait();
     }
 
     public void close() {
         stage.close();
+        parent.initialize();
     }
 
     public static class Builder {
 
         private FXMLLoader loader;
+        private IController parent;
         private int width;
         private int height;
 
         public Builder fxml(String fxml) {
             loader = new FXMLLoader(getClass().getResource(fxml));
+
+            return this;
+        }
+
+        //TODO better way to do this?
+        public Builder parent(IController parent) {
+            this.parent = parent;
 
             return this;
         }
@@ -68,6 +78,11 @@ public class Modal {
             }
 
             modal.stage = stage;
+            modal.parent = this.parent;
+
+            if (loader.getController() instanceof IModalController) {
+                ((IModalController) loader.getController()).setModal(modal);
+            }
 
             Button close = new Button("x");
             close.setLayoutX(this.width - 50);
@@ -76,7 +91,6 @@ public class Modal {
             close.getStyleClass().add("close");
 
             root.getChildren().add(close);
-
             root.requestFocus();
 
             return modal;

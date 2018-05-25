@@ -26,12 +26,12 @@ public class ControllerGrey {
     private Label welcome; // welcome text
 
     @FXML
-    private Button btnDashboard;
-    private Button btnActive; // currently selected button
+    private Button dashboard;
+    private Button active; // currently selected button
 
     public void initialize() {
-        btnActive = btnDashboard;
-        btnActive.getStyleClass().add("btnActive");
+        active = dashboard;
+        active.getStyleClass().add("active");
     }
 
     public void setStage(Stage stage) {
@@ -70,9 +70,9 @@ public class ControllerGrey {
         String id = btn.getId();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(id + "/" + id + ".fxml"));
 
-        btnActive.getStyleClass().remove("btnActive");
-        btnActive = btn;
-        btnActive.getStyleClass().add("btnActive");
+        active.getStyleClass().remove("active");
+        active = btn;
+        active.getStyleClass().add("active");
 
         try {
             content.setCenter(loader.load());

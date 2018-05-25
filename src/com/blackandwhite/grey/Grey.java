@@ -8,7 +8,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-//TODO connection pooling, close connection, result, statement on finish...
 public class Grey extends Application {
 
     @Override
