@@ -1,92 +1,89 @@
 package com.blackandwhite.grey.customers;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Customer {
 
-    private String first;
-    private String last;
-    private String city;
-    private String province;
-    private String postal;
-    private String address;
-    private String email;
-    private String work;
-    private String cell;
-    private String home;
-
-    @Override
-    public String toString() {
-        return String.format("%s %s\n%s, %s, %s, %s\nEmail: %s\nWork #: %s\nCell #: %s\nHome #: %s", first, last, address, city, province, postal, email, work, cell, home);
-    }
+    private SimpleStringProperty first;
+    private SimpleStringProperty last;
+    private SimpleStringProperty city;
+    private SimpleStringProperty prov;
+    private SimpleStringProperty postal;
+    private SimpleStringProperty addr;
+    private SimpleStringProperty email;
+    private SimpleStringProperty work;
+    private SimpleStringProperty cell;
+    private SimpleStringProperty home;
 
     public static class Builder {
 
-        private String first;
-        private String last;
-        private String city;
-        private String province;
-        private String postal;
-        private String address;
-        private String email;
-        private String work;
-        private String cell;
-        private String home;
+        private SimpleStringProperty first;
+        private SimpleStringProperty last;
+        private SimpleStringProperty city;
+        private SimpleStringProperty prov;
+        private SimpleStringProperty postal;
+        private SimpleStringProperty addr;
+        private SimpleStringProperty email;
+        private SimpleStringProperty work;
+        private SimpleStringProperty cell;
+        private SimpleStringProperty home;
 
         public Builder first(String first) {
-            this.first = first;
+            this.first = new SimpleStringProperty(first);
 
             return this;
         }
 
         public Builder last(String last) {
-            this.last = last;
+            this.last = new SimpleStringProperty(last);
 
             return this;
         }
 
         public Builder city(String city) {
-            this.city = city;
+            this.city = new SimpleStringProperty(city);
 
             return this;
         }
 
-        public Builder province(String province) {
-            this.province = province;
+        public Builder prov(String prov) {
+            this.prov = new SimpleStringProperty(prov);
 
             return this;
         }
 
         public Builder postal(String postal) {
-            this.postal = postal;
+            this.postal = new SimpleStringProperty(postal);
 
             return this;
         }
 
-        public Builder address(String address) {
-            this.address = address;
+        public Builder addr(String addr) {
+            this.addr = new SimpleStringProperty(addr);
 
             return this;
         }
 
         public Builder email(String email) {
-            this.email = email;
+            this.email = new SimpleStringProperty(email);
 
             return this;
         }
 
         public Builder work(String work) {
-            this.work = work;
+            this.work = new SimpleStringProperty(work);
 
             return this;
         }
 
         public Builder cell(String cell) {
-            this.cell = cell;
+            this.cell = new SimpleStringProperty(cell);
 
             return this;
         }
 
         public Builder home(String home) {
-            this.home = home;
+            this.home = new SimpleStringProperty(home);
 
             return this;
         }
@@ -97,9 +94,9 @@ public class Customer {
             customer.first = this.first;
             customer.last = this.last;
             customer.city = this.city;
-            customer.province = this.province;
+            customer.prov = this.prov;
             customer.postal = this.postal;
-            customer.address = this.address;
+            customer.addr = this.addr;
             customer.email = this.email;
             customer.work = this.work;
             customer.cell = this.cell;

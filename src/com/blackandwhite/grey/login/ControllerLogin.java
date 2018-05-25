@@ -1,8 +1,8 @@
 package com.blackandwhite.grey.login;
 
-import com.blackandwhite.grey.Controller;
 import com.blackandwhite.grey.ControllerGrey;
 import com.blackandwhite.grey.Database;
+import javafx.application.Platform;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,14 +10,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Connection;
 
-public class ControllerLogin extends Controller {
+public class ControllerLogin {
 
     private Stage stage;
+    private double dx;
+    private double dy;
 
     @FXML
     private TextField userField;
@@ -27,13 +30,25 @@ public class ControllerLogin extends Controller {
 
     private PseudoClass error = PseudoClass.getPseudoClass("error");
 
-    @Override
-    public void init() {
-
-    }
-
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    @FXML
+    private void menubarPressed(MouseEvent e) {
+        dx = stage.getX() - e.getScreenX();
+        dy = stage.getY() - e.getScreenY();
+    }
+
+    @FXML
+    private void menubarDragged(MouseEvent e) {
+        stage.setX(e.getScreenX() + dx);
+        stage.setY(e.getScreenY() + dy);
+    }
+
+    @FXML
+    private void close() {
+        Platform.exit();
     }
 
     @FXML
@@ -77,8 +92,8 @@ public class ControllerLogin extends Controller {
         }
 
         ControllerGrey grey = loader.getController();
-        grey.init();
         grey.setStage(stage);
+        grey.setUser(user);
 
         Scene scene = new Scene(root, 1170, 720);
 

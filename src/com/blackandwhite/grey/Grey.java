@@ -3,8 +3,8 @@ package com.blackandwhite.grey;
 import com.blackandwhite.grey.login.ControllerLogin;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -30,17 +30,19 @@ public class Grey extends Application {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("login/login.fxml"));
 
-        Parent root = loader.load();
+        Pane root = loader.load();
 
         ControllerLogin login = loader.getController();
-        login.init();
         login.setStage(stage);
 
-        Scene scene = new Scene(root, 600, 400);
+        Scene scene = new Scene(root, 400, 500);
 
         stage.setScene(scene);
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
+
+        root.requestFocus();
+
         stage.show();
     }
 

@@ -1,3 +1,18 @@
+.root {
+    -fx-background-color: #ffffff;
+}
+
+.login {
+    -fx-background-color: #70AAF8;
+    -fx-text-fill: #ffffff;
+}
+
+.close {
+    -fx-background-color: transparent;
+    -fx-font-size: 20px;
+    -fx-text-fill: #4d5665;
+}
+
 .text-field:error {
     -fx-text-box-border: red;
     -fx-focus-color: red;

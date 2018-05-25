@@ -1,14 +1,18 @@
 package com.blackandwhite.grey.customers;
 
-import com.blackandwhite.grey.Controller;
 import com.blackandwhite.grey.Modal;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.regex.Pattern;
 
-public class ControllerCustomers extends Controller {
+public class ControllerCustomers {
 
     private static Modal add;
     private static Modal search;
@@ -24,13 +28,13 @@ public class ControllerCustomers extends Controller {
 
     //TODO dropdown menu?
     @FXML
-    private TextField provinceField;
+    private TextField provField;
 
     @FXML
     private TextField postalField;
 
     @FXML
-    private TextField addressField;
+    private TextField addrField;
 
     @FXML
     private TextField emailField;
@@ -46,9 +50,61 @@ public class ControllerCustomers extends Controller {
 
     private PseudoClass error = PseudoClass.getPseudoClass("error");
 
-    @Override
-    public void init() {
+    @FXML
+    private TableView<Customer> table;
 
+    @FXML
+    private TableColumn<Customer, String> firstCol;
+
+    @FXML
+    private TableColumn<Customer, String> lastCol;
+
+    @FXML
+    private TableColumn<Customer, String> cityCol;
+
+    @FXML
+    private TableColumn<Customer, String> provCol;
+
+    @FXML
+    private TableColumn<Customer, String> postalCol;
+
+    @FXML
+    private TableColumn<Customer, String> emailCol;
+
+    @FXML
+    private TableColumn<Customer, String> workCol;
+
+    @FXML
+    private TableColumn<Customer, String> cellCol;
+
+    @FXML
+    private TableColumn<Customer, String> homeCol;
+
+    @FXML
+    private TableColumn<Customer, String> addrCol;
+
+    public void initialize() {
+        firstCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+        cityCol.setCellValueFactory(new PropertyValueFactory<>("city"));
+        provCol.setCellValueFactory(new PropertyValueFactory<>("prov"));
+        postalCol.setCellValueFactory(new PropertyValueFactory<>("postal"));
+        workCol.setCellValueFactory(new PropertyValueFactory<>("work"));
+        cellCol.setCellValueFactory(new PropertyValueFactory<>("cell"));
+        homeCol.setCellValueFactory(new PropertyValueFactory<>("home"));
+        addrCol.setCellValueFactory(new PropertyValueFactory<>("addr"));
+
+        ObservableList<Customer> list = getCustomerList();
+        table.setItems(list);
+    }
+
+    private ObservableList<Customer> getCustomerList() {
+        Customer c1 = new Customer.Builder().first("Jim").last("Halpert").city("Scranton").prov("Pennsylvania").postal("90210").addr("51 Dunder Mifflin Dr").email("Jimhalps@dunder.com").work("5001231234").cell("5195051234").home("").build();
+
+        ObservableList<Customer> list = FXCollections.observableArrayList(c1);
+
+        return list;
     }
 
     /*
@@ -66,9 +122,9 @@ public class ControllerCustomers extends Controller {
         String first = firstField.getText();
         String last = lastField.getText();
         String city = cityField.getText();
-        String province = provinceField.getText();
+        String prov = provField.getText();
         String postal = postalField.getText();
-        String address = addressField.getText();
+        String addr = addrField.getText();
         String email = emailField.getText();
         String work = workField.getText();
         String cell = cellField.getText();

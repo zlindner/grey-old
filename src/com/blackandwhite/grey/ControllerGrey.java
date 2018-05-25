@@ -5,15 +5,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
-public class ControllerGrey extends Controller {
+public class ControllerGrey {
 
     private Stage stage;
 
@@ -24,17 +23,23 @@ public class ControllerGrey extends Controller {
     private BorderPane content;
 
     @FXML
+    private Label welcome; // welcome text
+
+    @FXML
     private Button dashboard;
     private Button active; // currently selected button
 
-    @Override
-    public void init() {
+    public void initialize() {
         active = dashboard;
         active.getStyleClass().add("active");
     }
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public void setUser(String user) {
+        welcome.setText("Welcome, " + user);
     }
 
     @FXML
@@ -70,14 +75,8 @@ public class ControllerGrey extends Controller {
         active.getStyleClass().add("active");
 
         try {
-            Class controller = Class.forName("com.blackandwhite.grey." + id + ".Controller" + Character.toUpperCase(id.charAt(0)) + id.substring(1));
-            Object o = controller.getConstructor().newInstance();
-
-            Method init = o.getClass().getMethod("init");
-            init.invoke(o);
-
             content.setCenter(loader.load());
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException | IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
