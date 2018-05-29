@@ -6,3 +6,8 @@
 .table-view {
     -fx-background-color: transparent;
 }
+
+.text-field:error {
+    -fx-text-box-border: red;
+    -fx-focus-color: red;
+}

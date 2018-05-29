@@ -16,6 +16,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ControllerLogin {
@@ -81,14 +82,13 @@ public class ControllerLogin {
         Connection con = null;
 
         try {
-            //TODO fails to connect if prior information was incorrect
-            DataSource.setUsername(user);
-            DataSource.setPassword(pass);
+            DataSource.getInstance().setUsername(user);
+            DataSource.getInstance().setPassword(pass);
 
             BasicDataSource basicDS = DataSource.getInstance().getBasicDS();
             con = basicDS.getConnection();
         } catch (SQLException e) {
-            System.out.println("Error establishing connection to database");
+            e.printStackTrace();
             return;
         } finally {
             if (con != null) {
@@ -100,8 +100,13 @@ public class ControllerLogin {
             }
         }
 
-        //TODO init database -> create tables if not exists, etc...
         //TODO progress bar / indicator for init database???
+
+        try {
+            initDatabase();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         stage.close();
 
@@ -124,5 +129,24 @@ public class ControllerLogin {
         stage.setScene(scene);
         stage.show();
         stage.centerOnScreen();
+    }
+
+    private void initDatabase() throws SQLException {
+        String query = "CREATE TABLE IF NOT EXISTS CUSTOMER (" +
+                "customer_id INT AUTO_INCREMENT PRIMARY KEY," +
+                "name VARCHAR(50) NOT NULL," +
+                "address VARCHAR(30)," +
+                "city VARCHAR(30)," +
+                "province VARCHAR(30)," +
+                "postal_code VARCHAR(6)," +
+                "email VARCHAR(50)," +
+                "work_phone VARCHAR(10)," +
+                "cell_phone VARCHAR(10))";
+
+        BasicDataSource basicDS = DataSource.getInstance().getBasicDS();
+
+        try (Connection con = basicDS.getConnection(); PreparedStatement st = con.prepareStatement(query)) {
+            st.execute();
+        }
     }
 }
