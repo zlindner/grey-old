@@ -29,7 +29,7 @@
         </TableView>
       <Button layoutX="645.0" layoutY="170.0" mnemonicParsing="false" onAction="#delete" prefHeight="30.0" prefWidth="200.0" text="Delete Customer" />
       <Button layoutX="645.0" layoutY="120.0" mnemonicParsing="false" onAction="#add" prefHeight="30.0" prefWidth="200.0" text="Add Customer" />
-      <Button layoutX="645.0" layoutY="220.0" mnemonicParsing="false" onAction="#filter" prefHeight="30.0" prefWidth="200.0" text="Filter Customers" />
+      <Button layoutX="640.0" layoutY="220.0" mnemonicParsing="false" onAction="#filter" prefHeight="30.0" prefWidth="100.0" text="Filter" />
       <TextField fx:id="tfName" layoutX="40.0" layoutY="120.0" prefHeight="30.0" prefWidth="250.0" promptText="Customer Name" />
       <TextField fx:id="tfAddress" layoutX="315.0" layoutY="120.0" prefHeight="30.0" prefWidth="250.0" promptText="Address" />
       <TextField fx:id="tfCity" layoutX="40.0" layoutY="170.0" prefHeight="30.0" prefWidth="200.0" promptText="City" />
@@ -38,5 +38,6 @@
       <TextField fx:id="tfEmail" layoutX="40.0" layoutY="220.0" prefHeight="30.0" prefWidth="225.0" promptText="Email" />
       <TextField fx:id="tfWorkPhone" layoutX="290.0" layoutY="220.0" prefHeight="30.0" prefWidth="125.0" promptText="Work phone" />
       <TextField fx:id="tfCellPhone" layoutX="440.0" layoutY="220.0" prefHeight="30.0" prefWidth="125.0" promptText="Cell phone" />
+      <Button layoutX="750.0" layoutY="220.0" mnemonicParsing="false" onAction="#clearFilter" prefHeight="30.0" prefWidth="100.0" text="Clear Filter" />
     </children>
 </AnchorPane>

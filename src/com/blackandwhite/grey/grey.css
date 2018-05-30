@@ -66,6 +66,10 @@
     -fx-background-image: url("/assets/purchases.png");
 }
 
+.leaks {
+    -fx-background-image: url("/assets/leaks.png");
+}
+
 .close {
     -fx-background-color: transparent;
     -fx-font-size: 20px;

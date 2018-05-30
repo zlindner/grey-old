@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -21,17 +22,23 @@ import java.sql.SQLException;
 
 public class ControllerLogin {
 
-    private Stage stage;
-    private double dx;
-    private double dy;
-
     @FXML
     private TextField tfUsername;
 
     @FXML
     private PasswordField pfPassword;
 
-    private PseudoClass error = PseudoClass.getPseudoClass("error");
+    @FXML
+    private Label lblError;
+
+    private Stage stage;
+    private double dx;
+    private double dy;
+    private PseudoClass error;
+
+    public void initialize() {
+        error = PseudoClass.getPseudoClass("error");
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -60,6 +67,8 @@ public class ControllerLogin {
         String pass = pfPassword.getText();
         boolean doConnect = true;
 
+        lblError.setText("");
+
         if (user.isEmpty()) {
             tfUsername.pseudoClassStateChanged(error, true);
             doConnect = false;
@@ -75,37 +84,19 @@ public class ControllerLogin {
         }
 
         if (!doConnect) {
-            //TODO error message
+            lblError.setText("Invalid login information.");
             return;
         }
 
-        Connection con = null;
+        DataSource.getInstance().setUsername(user);
+        DataSource.getInstance().setPassword(pass);
+        BasicDataSource basicDS = DataSource.getInstance().getBasicDS();
 
-        try {
-            DataSource.getInstance().setUsername(user);
-            DataSource.getInstance().setPassword(pass);
-
-            BasicDataSource basicDS = DataSource.getInstance().getBasicDS();
-            con = basicDS.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return;
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        //TODO progress bar / indicator for init database???
-
-        try {
+        try (Connection con = basicDS.getConnection()) {
             initDatabase();
         } catch (SQLException e) {
-            e.printStackTrace();
+            lblError.setText("Error connecting to the database.");
+            return;
         }
 
         stage.close();

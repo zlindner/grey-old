@@ -3,6 +3,7 @@ package com.blackandwhite.grey.customers;
 import com.blackandwhite.grey.DataSource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -265,14 +266,6 @@ public class ControllerCustomers {
     }
 
     @FXML
-    private void filter() {
-        //TODO filter
-        //TODO some way to remove currently applied filter
-
-        reset();
-    }
-
-    @FXML
     private void delete() {
         ObservableList<Customer> selected = table.getSelectionModel().getSelectedItems();
 
@@ -308,6 +301,65 @@ public class ControllerCustomers {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void filter() {
+        FilteredList<Customer> filter = new FilteredList<>(customers);
+
+        table.setItems(filter);
+
+        filter.setPredicate(c -> {
+            String name = tfName.getText();
+            String address = tfAddress.getText();
+            String city = tfCity.getText();
+            String province = cbProvince.getValue();
+            String postalCode = tfPostalCode.getText();
+            String email = tfEmail.getText();
+            String workPhone = tfWorkPhone.getText();
+            String cellPhone = tfCellPhone.getText();
+
+            if (!name.isEmpty() && !name.equalsIgnoreCase(c.getName())) {
+                return false;
+            }
+
+            if (!address.isEmpty() && !address.equalsIgnoreCase(c.getAddress())) {
+                return false;
+            }
+
+            if (!city.isEmpty() && !city.equalsIgnoreCase(c.getCity())) {
+                return false;
+            }
+
+            if (province != null && !province.equalsIgnoreCase(c.getProvince())) {
+                return false;
+            }
+
+            if (!postalCode.isEmpty() && !postalCode.equalsIgnoreCase(c.getPostalCode())) {
+                return false;
+            }
+
+            if (!email.isEmpty() && !email.equalsIgnoreCase(c.getEmail())) {
+                return false;
+            }
+
+            if (!workPhone.isEmpty() && !workPhone.equals(c.getWorkPhone())) {
+                return false;
+            }
+
+            if (!cellPhone.isEmpty() && !cellPhone.equals(c.getCellPhone())) {
+                return false;
+            }
+
+            return true;
+        });
+
+        reset();
+    }
+
+    @FXML
+    private void clearFilter() {
+        table.setItems(customers);
     }
 
     private boolean validatePostal(String postal) {

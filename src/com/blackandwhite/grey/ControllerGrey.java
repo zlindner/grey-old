@@ -14,24 +14,23 @@ import java.io.IOException;
 
 public class ControllerGrey {
 
-    private Stage stage;
-
-    private double dx;
-    private double dy;
-
     @FXML
     private BorderPane content;
 
     @FXML
-    private Label welcome; // welcome text
+    private Label lblWelcome;
 
     @FXML
     private Button dashboard;
-    private Button active; // currently selected button
+
+    private Button btnActive;
+    private Stage stage;
+    private double dx;
+    private double dy;
 
     public void initialize() {
-        active = dashboard;
-        active.getStyleClass().add("active");
+        btnActive = dashboard;
+        btnActive.getStyleClass().add("active");
     }
 
     public void setStage(Stage stage) {
@@ -39,7 +38,7 @@ public class ControllerGrey {
     }
 
     public void setUser(String user) {
-        welcome.setText("Welcome, " + user);
+        lblWelcome.setText("Welcome, " + user);
     }
 
     @FXML
@@ -70,9 +69,9 @@ public class ControllerGrey {
         String id = btn.getId();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(id + "/" + id + ".fxml"));
 
-        active.getStyleClass().remove("active");
-        active = btn;
-        active.getStyleClass().add("active");
+        btnActive.getStyleClass().remove("active");
+        btnActive = btn;
+        btnActive.getStyleClass().add("active");
 
         try {
             content.setCenter(loader.load());

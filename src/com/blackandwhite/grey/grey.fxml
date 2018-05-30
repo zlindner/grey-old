@@ -14,7 +14,7 @@
    <children>
       <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="250.0" styleClass="sidebar">
          <children>
-            <Label fx:id="welcome" styleClass="welcome" text="Welcome, [name]">
+            <Label fx:id="lblWelcome" styleClass="welcome" text="Welcome, [name]">
                <VBox.margin>
                   <Insets left="20.0" />
                </VBox.margin>
@@ -78,6 +78,15 @@
                <padding>
                   <Insets left="70.0" />
                </padding></Button>
+            <Button fx:id="leaks" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#sidebarClicked" prefHeight="50.0" prefWidth="250.0" text="Leaks">
+               <styleClass>
+                  <String fx:value="sidebar-button" />
+                  <String fx:value="leaks" />
+               </styleClass>
+               <padding>
+                  <Insets left="70.0" />
+               </padding>
+            </Button>
          </children>
       </VBox>
       <BorderPane fx:id="content" layoutX="250.0" prefHeight="720.0" prefWidth="920.0" styleClass="content">
