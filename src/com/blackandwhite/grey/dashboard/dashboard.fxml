@@ -36,8 +36,8 @@
          </font>
       </Label>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="150.0" layoutX="340.0" layoutY="325.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="5.0" width="275.0" />
-      <PieChart fx:id="pcLeaks" labelsVisible="false" layoutX="425.0" layoutY="325.0" legendVisible="false" prefHeight="100.0" prefWidth="100.0" />
-      <Circle fill="WHITE" layoutX="525.0" layoutY="400.0" radius="50.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
+      <PieChart fx:id="pcLeaks" labelsVisible="false" layoutX="380.0" layoutY="325.0" legendVisible="false" prefHeight="100.0" prefWidth="100.0" />
+      <Circle fill="WHITE" layoutX="480.0" layoutY="400.0" radius="50.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
       <Label layoutX="355.0" layoutY="340.0" text="Leaks">
          <font>
             <Font size="18.0" />

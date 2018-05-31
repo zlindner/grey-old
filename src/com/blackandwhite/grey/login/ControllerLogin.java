@@ -139,5 +139,20 @@ public class ControllerLogin {
         try (Connection con = basicDS.getConnection(); PreparedStatement st = con.prepareStatement(query)) {
             st.execute();
         }
+
+        query = "CREATE TABLE IF NOT EXISTS LEAK (" +
+                "leak_id INT AUTO_INCREMENT PRIMARY KEY," +
+                "status VARCHAR(15)," +
+                "address VARCHAR(30)," +
+                "date_opened DATETIME," +
+                "opener VARCHAR(10)," +
+                "date_closed DATETIME," +
+                "closer VARCHAR(10)," +
+                "date_assigned DATETIME," +
+                "assignee VARCHAR(10))";
+
+        try (Connection con = basicDS.getConnection(); PreparedStatement st = con.prepareStatement(query)) {
+            st.execute();
+        }
     }
 }
