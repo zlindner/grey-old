@@ -7,6 +7,10 @@ A desktop application I made for Black and White Roofing during the Summer of 20
 To view my grey locally:
 
 -   Clone this repository
+-   Open the project in your IDE of choice (Eclipse / IDEA / etc.)
+-   Add the libraries in the /lib folder to the project
+-   Set the main class to Grey.java
+-   Run the project
 
 ## Built with
 
