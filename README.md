@@ -4,7 +4,7 @@ A desktop application I made for Black and White Roofing during the Summer of 20
 
 ## Getting started
 
-To view my grey locally:
+To view grey locally:
 
 -   Clone this repository
 -   Open the project in your IDE of choice (Eclipse / IDEA / etc.)
