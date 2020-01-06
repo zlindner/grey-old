@@ -17,7 +17,6 @@ To view grey locally:
 -   [JavaFX](https://www.oracle.com/technetwork/java/javase/overview/javafx-overview-2158620.html) - Frontend library
 -   [Scene Builder](https://gluonhq.com/products/scene-builder/) - User interface builder
 -   [MySQL](https://www.mysql.com/) - Database
--   [Apache Commons - DBCP](https://commons.apache.org/proper/commons-dbcp/) - Database connection pooling
 
 ## License
 
